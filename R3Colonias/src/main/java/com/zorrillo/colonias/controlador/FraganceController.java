@@ -31,34 +31,34 @@ import org.springframework.web.bind.annotation.RestController;
 public class FraganceController {
 
     @Autowired
-    private UserFragance accessoryService;
+    private UserFragance userFragance;
 
     @GetMapping("/all")
     public List<Fragance> getAll() {
-        return accessoryService.getAll();
+        return userFragance.getAll();
     }
 
     @GetMapping("/{reference}")
     public Optional<Fragance> getFragance(@PathVariable("reference") String reference) {
-        return accessoryService.getFragance(reference);
+        return userFragance.getFragance(reference);
     }
 
     @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
     public Fragance create(@RequestBody Fragance fragance) {
-        return accessoryService.create(fragance);
+        return userFragance.create(fragance);
     }
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
     public Fragance update(@RequestBody Fragance fragance) {
-        return accessoryService.update(fragance);
+        return userFragance.update(fragance);
     }
 
     @DeleteMapping("/{reference}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete(@PathVariable("reference") String reference) {
-        return accessoryService.delete(reference);
+        return userFragance.delete(reference);
     }
 
 }

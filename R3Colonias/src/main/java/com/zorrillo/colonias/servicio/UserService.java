@@ -18,25 +18,25 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
     @Autowired
-    private UserRepositorio userRepository;
+    private UserRepositorio userRepositorio;
 
     public List<User> getAll() {
-        return userRepository.getAll();
+        return userRepositorio.getAll();
     }
 
     public Optional<User> getUser(int id) {
         
-        return userRepository.getUser(id);
+        return userRepositorio.getUser(id);
     }
 
     public User create(User user) {
         if (user.getId() == null) {
             return user;            
         }else {
-            Optional<User> e = userRepository.getUser(user.getId());
+            Optional<User> e = userRepositorio.getUser(user.getId());
             if (e.isEmpty()) {
                 if (emailExists(user.getEmail())==false){
-                    return userRepository.create(user);
+                    return userRepositorio.create(user);
                 }else{
                     return user;
                 }
@@ -49,7 +49,7 @@ public class UserService {
     public User update(User user) {
 
         if (user.getId() != null) {
-            Optional<User> userDb = userRepository.getUser(user.getId());
+            Optional<User> userDb = userRepositorio.getUser(user.getId());
             if (!userDb.isEmpty()) {
                 if (user.getIdentification() != null) {
                     userDb.get().setIdentification(user.getIdentification());
@@ -73,7 +73,7 @@ public class UserService {
                     userDb.get().setZone(user.getZone());
                 }
                 
-                userRepository.update(userDb.get());
+                userRepositorio.update(userDb.get());
                 return userDb.get();
             } else {
                 return user;
@@ -85,18 +85,18 @@ public class UserService {
     
     public boolean delete(int userId) {
         Boolean aBoolean = getUser(userId).map(user -> {
-            userRepository.delete(user);
+            userRepositorio.delete(user);
             return true;
         }).orElse(false);
         return aBoolean;
     }
     
     public boolean emailExists(String email) {
-        return userRepository.emailExists(email);
+        return userRepositorio.emailExists(email);
     }
 
     public User authenticateUser(String email, String password) {
-        Optional<User> usuario = userRepository.authenticateUser(email, password);
+        Optional<User> usuario = userRepositorio.authenticateUser(email, password);
 
         if (usuario.isEmpty()) {
             return new User();

@@ -15,6 +15,7 @@ import org.springframework.data.mongodb.repository.Query;
  * @author ydiez
  */
 public interface InterfaceOrder extends MongoRepository<Order, Integer> {
+    //List<Order> findBySalesManZone(String zone);
     
     //Retorna las ordenes de pedido que coincidad con la zona recibida como parametro
     @Query("{'salesMan.zone': ?0}")

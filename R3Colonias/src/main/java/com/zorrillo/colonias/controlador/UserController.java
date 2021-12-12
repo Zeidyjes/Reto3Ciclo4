@@ -3,10 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.zorrillo.colonias.controlador;
- 
+
 import com.zorrillo.colonias.servicio.UserService;
 import com.zorrillo.colonias.modelo.User;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,48 +21,85 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-
-
 /**
- *
  * @author Zeidy Johana Estupiñan S.
+ * @since 23 de noviembre de 2021
  */
 @RestController
 @RequestMapping("/api/user")
 @CrossOrigin("*")
 public class UserController {
+
+    /**
+     * @Autowired llamado al objeto user para inyectarle los servicios
+     */
     @Autowired
     private UserService userService;
-  
-     
-     @GetMapping("/all")
+/**
+ * 
+ * @return 
+ */
+    @GetMapping("/all")
     public List<User> getAll() {
         return userService.getAll();
     }
-      @PostMapping("/new")
+/**
+ * 
+ * @param id
+ * @return 
+ */
+    @GetMapping("/{id}")
+    public Optional<User> getUser(@PathVariable("id") Integer id) {
+        return userService.getUser(id);
+    }
+/**
+ * 
+ * @param user
+ * @return 
+ */
+    @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
     public User create(@RequestBody User user) {
         return userService.create(user);
     }
-    
+/**
+ * 
+ * @param user
+ * @return 
+ */
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
     public User update(@RequestBody User user) {
         return userService.update(user);
     }
+/**
+ * 
+ * @param id
+ * @return 
+ */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete(@PathVariable("id") int id) {
         return userService.delete(id);
     }
+/**
+ * 
+ * @param email
+ * @param password
+ * @return 
+ */
     @GetMapping("/{email}/{password}")
     public User authenticateUser(@PathVariable("email") String email, @PathVariable("password") String password) {
         return userService.authenticateUser(email, password);
     }
-      @GetMapping("/emailexist/{email}")
+/**
+ * 
+ * @param email
+ * @return 
+ */
+    @GetMapping("/emailexist/{email}")
     public boolean emailExists(@PathVariable("email") String email) {
         return userService.emailExists(email);
     }
-
 
 }

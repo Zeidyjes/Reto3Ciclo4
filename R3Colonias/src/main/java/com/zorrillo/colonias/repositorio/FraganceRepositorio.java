@@ -18,25 +18,25 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class FraganceRepositorio {
     @Autowired
-    private InterfaceFragance repository;
+    private InterfaceFragance interfaceFragance;
 
     public List<Fragance> getAll() {
-        return repository.findAll();
+        return interfaceFragance.findAll();
     }
 
     public Optional<Fragance> getFragance(String reference) {
-        return repository.findById(reference);
+        return interfaceFragance.findById(reference);
     }
     public Fragance create(Fragance fragance) {
-        return repository.save(fragance);
+        return interfaceFragance.save(fragance);
     }
 
     public void update(Fragance fragance) {
-        repository.save(fragance);
+        interfaceFragance.save(fragance);
     }
     
     public void delete(Fragance fragance) {
-        repository.delete(fragance);
+        interfaceFragance.delete(fragance);
     }
 
 

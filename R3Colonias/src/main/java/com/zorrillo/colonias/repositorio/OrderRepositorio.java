@@ -48,5 +48,7 @@ public class OrderRepositorio {
     public List<Order> findByZone(String zona) {
         return interfaceOrder.findByZone(zona);
     }
-    
+//    public List<Order> getOrderByZone(String zone){
+//        return interfaceOrder.findBySalesManZone(zone);
+//    }
 }
